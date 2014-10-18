@@ -165,16 +165,7 @@ public class GameManager {
 		fw.setFireworkMeta(fwm);
 
 		scores.put(p.getUniqueId(), scores.containsKey(p.getUniqueId()) ? scores.get(p.getUniqueId()) + 1 : 1);
-		if (scores.get(p.getUniqueId()) > 3) {
-			inGame = false;
-			Bukkit.broadcastMessage(Formatting.PREFIX + p.getName() + " won the game!");
 
-			for (Player player : Bukkit.getOnlinePlayers()) {
-				for (Player pl : Bukkit.getOnlinePlayers()) {
-					pl.showPlayer(player);
-				}
-			}
-		}
 		Bukkit.broadcastMessage(Formatting.PREFIX + "Top " + (scores.size() < 3 ? scores.size() : 3) + ":");
 		List<UUID> players = Lists.newArrayList(scores.keySet());
 		Collections.sort(players, new Comparator<UUID>() {
@@ -190,6 +181,27 @@ public class GameManager {
 
 		playing.clear();
 		dontMove.clear();
+
+		if (scores.get(p.getUniqueId()) > 3) {
+			inGame = false;
+			Bukkit.broadcastMessage(Formatting.PREFIX + p.getName() + " won the game!");
+
+			for (Player player : Bukkit.getOnlinePlayers()) {
+				for (Player pl : Bukkit.getOnlinePlayers()) {
+					pl.showPlayer(player);
+				}
+			}
+
+			Bukkit.broadcastMessage(Formatting.PREFIX + "Stopping server in 5 seconds...");
+			Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+				@Override
+				public void run() {
+					Bukkit.shutdown();
+				}
+			}, 20 * 5);
+			return;
+		}
+
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			playing.add(player.getUniqueId());
 			changeMode(player);
