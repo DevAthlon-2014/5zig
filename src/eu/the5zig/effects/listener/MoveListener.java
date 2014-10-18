@@ -53,6 +53,8 @@ public class MoveListener implements Listener {
 							p.sendBlockChange(ll, Material.HARD_CLAY, (byte) 0);
 						}
 					}, 40);
+				} else if (e.getTo().getBlockX() >= max.getBlockX()) {
+					plugin.getGameManager().endGame(p);
 				}
 			}
 		}

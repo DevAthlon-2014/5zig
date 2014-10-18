@@ -4,7 +4,7 @@
 Repository for 5zig.
 
 
-Idee (steht noch nicht zu 100% fest)
+Idee
 ===
 
 1. Man wählt ein Rechteck in Minecraft aus

@@ -115,4 +115,8 @@ public class GameManager {
 		}
 	}
 
+	public void endGame(Player p) {
+		
+	}
+
 }
