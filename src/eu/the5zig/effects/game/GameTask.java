@@ -30,7 +30,7 @@ public class GameTask extends BukkitRunnable {
 	public void run() {
 		if ((seconds % 20 == 0 || seconds == 10 || seconds <= 5) && seconds != 0) Bukkit.broadcastMessage(seconds + " seconds remaining!");
 		seconds--;
-		if (seconds <= 0) startGame();
+		if (seconds < 0) startGame();
 	}
 
 	private void startGame() {
