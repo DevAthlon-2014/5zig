@@ -1,0 +1,6 @@
+name: Effects
+version: 1.0
+author: 5zig
+main: eu.the5zig.effects.Main
+commands:
+     effect:
