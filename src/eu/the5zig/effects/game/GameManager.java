@@ -168,6 +168,12 @@ public class GameManager {
 		if (scores.get(p.getUniqueId()) > 3) {
 			inGame = false;
 			Bukkit.broadcastMessage(Formatting.PREFIX + p.getName() + " won the game!");
+
+			for (Player player : Bukkit.getOnlinePlayers()) {
+				for (Player pl : Bukkit.getOnlinePlayers()) {
+					pl.showPlayer(player);
+				}
+			}
 		}
 		Bukkit.broadcastMessage(Formatting.PREFIX + "Top " + (scores.size() < 3 ? scores.size() : 3) + ":");
 		List<UUID> players = Lists.newArrayList(scores.keySet());

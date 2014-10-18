@@ -86,7 +86,7 @@ public class PlatformManager {
 					e.printStackTrace();
 				}
 
-				plugin.getGeneratorManager().getResetPlatformGenerator().generate();
+				plugin.getGeneratorManager().getBorderGenerator().generate();
 				plugin.getGeneratorManager().getResetPlatformGenerator().generate();
 
 				removeFromSelectList(p);
