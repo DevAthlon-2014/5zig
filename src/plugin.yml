@@ -1,6 +1,7 @@
-name: Effects
+name: Pathfind
 version: 1.0
 author: 5zig
+description: GommeHD DevAthlon #1
 main: eu.the5zig.effects.Main
 commands:
      pathfind:
