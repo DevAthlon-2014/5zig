@@ -20,6 +20,7 @@ public class ItemListener implements Listener {
 	@EventHandler
 	public void onInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
+		if (!plugin.getGameManager().isInGame()) return;
 		if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			if (p.getItemInHand() != null) {
 				if (p.getItemInHand().getType() == Material.SUGAR || p.getItemInHand().getType() == Material.REDSTONE) {

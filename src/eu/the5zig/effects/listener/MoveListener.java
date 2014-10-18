@@ -24,6 +24,7 @@ public class MoveListener implements Listener {
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
 		Player p = e.getPlayer();
+		if (!plugin.getGameManager().isInGame()) return;
 		if (plugin.getGameManager().isPlaying(p)) {
 			if (e.getTo().getBlockX() != e.getFrom().getBlockX() || e.getTo().getBlockZ() != e.getFrom().getBlockZ()) {
 				Location min = plugin.getConfigManager().getPlatformManager().getMin();
@@ -53,8 +54,11 @@ public class MoveListener implements Listener {
 							p.sendBlockChange(ll, Material.HARD_CLAY, (byte) 0);
 						}
 					}, 40);
-				} else if (e.getTo().getBlockX() >= max.getBlockX()) {
+				} else if (e.getTo().getBlockX() >= max.getBlockX() && (e.getTo().getBlockZ() >= min.getBlockZ() || e.getTo().getBlockZ() <= max.getBlockZ())) {
 					plugin.getGameManager().endGame(p);
+				} else if (e.getTo().getBlockX() == min.getBlockX()) {
+				} else {
+					p.teleport(e.getFrom());
 				}
 			}
 		}

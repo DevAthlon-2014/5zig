@@ -4,3 +4,5 @@ author: 5zig
 main: eu.the5zig.effects.Main
 commands:
      pathfind:
+          description: For more informations type /pathfind help
+          usage: /<command>

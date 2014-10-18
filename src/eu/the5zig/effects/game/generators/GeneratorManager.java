@@ -29,6 +29,11 @@ public class GeneratorManager {
 	public PathGenerator getPathGenerator() {
 		return pathGenerator;
 	}
+	
+	public void resetPathGenerator() {
+		pathGenerator.cancel();
+		pathGenerator = new PathGenerator(this);
+	}
 
 	public Main getPlugin() {
 		return plugin;

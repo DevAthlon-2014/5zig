@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class PlayerListener implements Listener {
@@ -22,12 +23,17 @@ public class PlayerListener implements Listener {
 			if (p.getGameMode() != GameMode.CREATIVE) e.setCancelled(true);
 		}
 	}
-	
+
 	@EventHandler
 	public void onEntityDamage(EntityDamageEvent e) {
 		if (e.getEntity() instanceof Player) {
 			e.setCancelled(true);
 		}
+	}
+
+	@EventHandler
+	public void onItemDrop(PlayerDropItemEvent e) {
+		if (e.getPlayer().getGameMode() != GameMode.CREATIVE) e.setCancelled(true);
 	}
 
 }

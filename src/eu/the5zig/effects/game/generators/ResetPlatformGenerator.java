@@ -13,6 +13,9 @@ public class ResetPlatformGenerator implements Generator {
 		this.manager = manager;
 	}
 
+	/**
+	 * Resets the platform
+	 */
 	@Override
 	public void generate() {
 		Location min = manager.getPlugin().getConfigManager().getPlatformManager().getMin();
