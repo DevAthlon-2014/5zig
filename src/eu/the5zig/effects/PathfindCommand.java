@@ -62,7 +62,7 @@ public class PathfindCommand implements CommandExecutor, TabCompleter {
 				showHelp(sender);
 			}
 		}
-		return false;
+		return true;
 	}
 
 	private void showHelp(CommandSender sender) {
