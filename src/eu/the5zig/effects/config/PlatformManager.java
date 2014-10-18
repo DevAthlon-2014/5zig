@@ -78,6 +78,9 @@ public class PlatformManager {
 				}
 				
 				plugin.getPlatformGenerator().generate();
+				plugin.getResetPlatformGenerator().generate();
+				
+				removeFromSelectList(p);
 			}
 		}
 	}

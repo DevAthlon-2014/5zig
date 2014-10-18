@@ -1,4 +1,4 @@
-package eu.the5zig.effects.game;
+package eu.the5zig.effects.game.generators;
 
 import eu.the5zig.effects.Main;
 
