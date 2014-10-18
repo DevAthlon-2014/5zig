@@ -8,6 +8,7 @@ import eu.the5zig.effects.game.GameManager;
 import eu.the5zig.effects.game.GameTask;
 import eu.the5zig.effects.game.generators.GeneratorManager;
 import eu.the5zig.effects.listener.FreezeListener;
+import eu.the5zig.effects.listener.ItemListener;
 
 public class Main extends JavaPlugin {
 
@@ -29,6 +30,7 @@ public class Main extends JavaPlugin {
 		PluginManager plManager = getServer().getPluginManager();
 		plManager.registerEvents(new BorderSelectionListener(this), this);
 		plManager.registerEvents(new FreezeListener(this), this);
+		plManager.registerEvents(new ItemListener(this), this);
 	}
 
 	@Override

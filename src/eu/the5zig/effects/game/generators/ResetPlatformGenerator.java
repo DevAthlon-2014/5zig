@@ -20,7 +20,7 @@ public class ResetPlatformGenerator implements Generator {
 
 		for (int x = min.getBlockX() + 1; x < max.getBlockX(); x++) {
 			for (int z = min.getBlockZ() + 1; z < max.getBlockZ(); z++) {
-				new Location(min.getWorld(), x, min.getBlockY(), z).getBlock().setType(Material.SNOW_BLOCK);
+				new Location(min.getWorld(), x, min.getBlockY(), z).getBlock().setType(Material.HARD_CLAY);
 			}
 		}
 	}

@@ -3,6 +3,8 @@ package eu.the5zig.effects.game.generators;
 import java.util.List;
 import java.util.Random;
 
+import javax.crypto.Cipher;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -36,65 +38,65 @@ public class PathGenerator extends BukkitRunnable implements Generator {
 
 		int lastx = x;
 		int lastz = z;
-		
+
 		while (x < max.getBlockX() - 1) {
 			int zp = z;
 			int xp = x;
 
-			int i = r.nextInt(3);
-			switch (i) {
-			case 0:
-				// increment x
-				xp++;
-				break;
-			case 1:
+			int i = r.nextInt(100);
+			if (i >= 0 && i < 40) {
 				// increment z
 				zp++;
-				break;
-			case 2:
+			} else if (i >= 40 && i < 60) {
+				// increment x
+				xp++;
+			} else if (i >= 60 && i < 100) {
 				// decrease z
 				zp--;
-				break;
-			default:
-				break;
 			}
 
-			boolean add = false;
-			
 			boolean xb = true;
-			for (Location loc : blocks) if (loc.getBlockX() == xp - 1 && loc.getBlockZ() == zp) xb = false;
-			
+			for (Location loc : blocks)
+				if (loc.getBlockX() == xp - 1 && loc.getBlockZ() == zp) xb = false;
+
 			if (lastz != zp && zp < max.getBlockZ() && zp > min.getBlockZ() && xb) {
 				z = zp;
 				lastz = z;
-				add = true;
 			} else if (lastx != xp && xp < max.getBlockX() && xp > min.getBlockX()) {
 				x = xp;
 				lastx = x;
-				add = true;
+			} else {
+				zp = z;
+				xp = x;
+				continue;
 			}
 
 			Location loc = new Location(min.getWorld(), x, y, z);
 
-			if (add && !blocks.contains(loc)) {
+			if (!blocks.contains(loc)) {
 				blocks.add(loc);
 			}
 		}
 
-		runTaskTimer(manager.getPlugin(), 0, 20);
+		runTaskTimer(manager.getPlugin(), 0, 4);
 	}
 
 	private int index = 0;
 
 	@Override
 	public void run() {
-		if (index >= blocks.size()) {
-			cancel();
-			return;
-		}
+//		if (index >= blocks.size()) {
+//			cancel();
+//			// manager.getPlugin().getGameManager().
+//			return;
+//		}
 
-		Location loc = blocks.get(index++);
-		loc.getBlock().setTypeIdAndData(Material.WOOL.getId(), (byte) 5, true);
-		Effect.animate(ParticleEffect.FLAME, loc);
+		Location loc = blocks.get(index++ % blocks.size());
+//		loc.getBlock().setTypeIdAndData(Material.WOOL.getId(), (byte) 5, true);
+		for (double x = loc.getX(); x <= loc.getX() + 1; x += 0.5) {
+			for (double z = loc.getZ(); z <= loc.getZ() + 1; z += 0.5) {
+				Effect.animate(ParticleEffect.INSTANT_SPELL, new Location(loc.getWorld(), x, loc.getY() + 1, z));
+			}
+		}
 	}
 }
