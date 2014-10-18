@@ -7,7 +7,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.comphenix.packetwrapper.WrapperPlayServerWorldParticles.ParticleEffect;
 import com.google.common.collect.Lists;
+
+import eu.the5zig.effects.util.Effect;
 
 public class PathGenerator extends BukkitRunnable implements Generator {
 
@@ -27,22 +30,25 @@ public class PathGenerator extends BukkitRunnable implements Generator {
 	public void generate() {
 		Location min = manager.getPlugin().getConfigManager().getPlatformManager().getMin();
 		Location max = manager.getPlugin().getConfigManager().getPlatformManager().getMax();
-		int x = min.getBlockX();
+		int x = min.getBlockX() + 1;
 		int y = min.getBlockY();
 		int z = min.getBlockZ() + (max.getBlockZ() - min.getBlockZ()) / 2;
 
-		while (x < max.getBlockX()) {
+		int lastx = x;
+		int lastz = z;
+		
+		while (x < max.getBlockX() - 1) {
 			int zp = z;
 			int xp = x;
 
 			int i = r.nextInt(3);
 			switch (i) {
 			case 0:
-				// incement x
+				// increment x
 				xp++;
 				break;
 			case 1:
-				// incement z
+				// increment z
 				zp++;
 				break;
 			case 2:
@@ -53,14 +59,26 @@ public class PathGenerator extends BukkitRunnable implements Generator {
 				break;
 			}
 
-			if (zp != z && zp < max.getBlockZ() && zp > min.getBlockZ()) {
+			boolean add = false;
+			
+			boolean xb = true;
+			for (Location loc : blocks) if (loc.getBlockX() == xp - 1 && loc.getBlockZ() == zp) xb = false;
+			
+			if (lastz != zp && zp < max.getBlockZ() && zp > min.getBlockZ() && xb) {
 				z = zp;
-			}
-			if (xp != x) {
+				lastz = z;
+				add = true;
+			} else if (lastx != xp && xp < max.getBlockX() && xp > min.getBlockX()) {
 				x = xp;
+				lastx = x;
+				add = true;
 			}
 
-			if (xp != x || zp != z) blocks.add(new Location(min.getWorld(), x, y, z));
+			Location loc = new Location(min.getWorld(), x, y, z);
+
+			if (add && !blocks.contains(loc)) {
+				blocks.add(loc);
+			}
 		}
 
 		runTaskTimer(manager.getPlugin(), 0, 20);
@@ -77,5 +95,6 @@ public class PathGenerator extends BukkitRunnable implements Generator {
 
 		Location loc = blocks.get(index++);
 		loc.getBlock().setTypeIdAndData(Material.WOOL.getId(), (byte) 5, true);
+		Effect.animate(ParticleEffect.FLAME, loc);
 	}
 }

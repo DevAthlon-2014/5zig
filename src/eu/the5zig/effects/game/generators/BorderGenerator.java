@@ -11,7 +11,6 @@ public class BorderGenerator implements Generator {
 		this.manager = manager;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void generate() {
 		Location min = manager.getPlugin().getConfigManager().getPlatformManager().getMin();
@@ -20,12 +19,12 @@ public class BorderGenerator implements Generator {
 		if (min == null || max == null) return;
 
 		for (int x = min.getBlockX(); x <= max.getBlockX(); x++) {
-			new Location(min.getWorld(), x, min.getBlockY(), min.getBlockZ()).getBlock().setTypeIdAndData(Material.WOOL.getId(), (byte) 15, true);
-			new Location(min.getWorld(), x, min.getBlockY(), max.getBlockZ()).getBlock().setTypeIdAndData(Material.WOOL.getId(), (byte) 15, true);
+			new Location(min.getWorld(), x, min.getBlockY(), min.getBlockZ()).getBlock().setTypeIdAndData(Material.WOOL.getId(), (byte) 13, true);
+			new Location(min.getWorld(), x, min.getBlockY(), max.getBlockZ()).getBlock().setTypeIdAndData(Material.WOOL.getId(), (byte) 13, true);
 		}
 		for (int z = min.getBlockZ(); z <= max.getBlockZ(); z++) {
-			new Location(min.getWorld(), min.getBlockX(), min.getBlockY(), z).getBlock().setTypeIdAndData(Material.WOOL.getId(), (byte) 15, true);
-			new Location(min.getWorld(), max.getBlockX(), min.getBlockY(), z).getBlock().setTypeIdAndData(Material.WOOL.getId(), (byte) 15, true);
+			new Location(min.getWorld(), min.getBlockX(), min.getBlockY(), z).getBlock().setTypeIdAndData(Material.WOOL.getId(), (byte) 13, true);
+			new Location(min.getWorld(), max.getBlockX(), min.getBlockY(), z).getBlock().setTypeIdAndData(Material.WOOL.getId(), (byte) 13, true);
 		}
 	}
 

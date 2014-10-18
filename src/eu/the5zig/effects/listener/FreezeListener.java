@@ -18,7 +18,7 @@ public class FreezeListener implements Listener {
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
 		Player p = e.getPlayer();
-		if (plugin.getGameManager().isFrozen(p)) e.setCancelled(true);
+		if (plugin.getGameManager().isFrozen(p)) p.teleport(e.getFrom());
 	}
 
 }

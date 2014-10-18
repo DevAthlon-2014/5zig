@@ -51,6 +51,7 @@ public class GameManager {
 			player.teleport(loc);
 			freezePlayer(player);
 		}
+		plugin.getGeneratorManager().getResetPlatformGenerator().generate();
 
 		Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
 			@Override
