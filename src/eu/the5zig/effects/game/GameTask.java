@@ -3,6 +3,7 @@ package eu.the5zig.effects.game;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import eu.the5zig.effects.Formatting;
 import eu.the5zig.effects.Main;
 import eu.the5zig.effects.config.PlatformManager;
 
@@ -31,7 +32,7 @@ public class GameTask extends BukkitRunnable {
 	 */
 	@Override
 	public void run() {
-		if ((seconds % 20 == 0 || seconds == 10 || seconds <= 5) && seconds != 0) Bukkit.broadcastMessage(seconds + " seconds remaining!");
+		if ((seconds % 20 == 0 || seconds == 10 || seconds <= 5) && seconds != 0) Bukkit.broadcastMessage(Formatting.PREFIX + seconds + " seconds until the game starts!");
 		seconds--;
 		if (seconds < 0) {
 			cancel();

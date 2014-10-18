@@ -27,7 +27,7 @@ public class Main extends JavaPlugin {
 		gameManager = new GameManager(this);
 		gameTask = new GameTask(this);
 
-		getCommand("effect").setExecutor(new EffectCommand(this));
+		getCommand("pathfind").setExecutor(new PathfindCommand(this));
 
 		PluginManager plManager = getServer().getPluginManager();
 		plManager.registerEvents(new BorderSelectionListener(this), this);

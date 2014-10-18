@@ -12,6 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.google.common.collect.Lists;
 
+import eu.the5zig.effects.Formatting;
 import eu.the5zig.effects.Main;
 import eu.the5zig.effects.util.ItemStackUtils;
 
@@ -43,11 +44,11 @@ public class GameManager {
 	public List<Location> getBlocks() {
 		return blocks;
 	}
-	
+
 	public List<UUID> getPlaying() {
 		return playing;
 	}
-	
+
 	public List<UUID> getDontMove() {
 		return dontMove;
 	}
@@ -57,10 +58,13 @@ public class GameManager {
 	 */
 	public void startGame() {
 		if (Bukkit.getOnlinePlayers().length < 1) {
-			Bukkit.broadcastMessage("Not enough players!");
+			Bukkit.broadcastMessage(Formatting.PREFIX + "Not enough players online! Resetting countdown");
 			plugin.startGameTask();
 			return;
 		}
+		Bukkit.broadcastMessage(Formatting.PREFIX + "The game has begun!");
+		Bukkit.broadcastMessage(Formatting.PREFIX + "Remember the path! If you are ready click on the redstone item in your inventory!");
+		Bukkit.broadcastMessage(Formatting.PREFIX + "First player that reaches the end wins!");
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			playing.add(player.getUniqueId());
 			changeMode(player);
@@ -116,7 +120,7 @@ public class GameManager {
 	}
 
 	public void endGame(Player p) {
-		
+
 	}
 
 }
