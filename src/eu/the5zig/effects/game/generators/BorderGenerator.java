@@ -3,18 +3,19 @@ package eu.the5zig.effects.game.generators;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
-import eu.the5zig.effects.Main;
+public class BorderGenerator implements Generator {
 
-public class BorderGenerator extends Generator {
+	private GeneratorManager manager;
 
-	public BorderGenerator(Main plugin) {
-		super(plugin);
+	public BorderGenerator(GeneratorManager manager) {
+		this.manager = manager;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void generate() {
-		Location min = plugin.getConfigManager().getPlatformManager().getMin();
-		Location max = plugin.getConfigManager().getPlatformManager().getMax();
+		Location min = manager.getPlugin().getConfigManager().getPlatformManager().getMin();
+		Location max = manager.getPlugin().getConfigManager().getPlatformManager().getMax();
 
 		if (min == null || max == null) return;
 

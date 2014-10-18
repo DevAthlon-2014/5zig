@@ -35,6 +35,8 @@ public class EffectCommand implements CommandExecutor {
 							p.sendMessage("Left- or Rightclick a block to select the border");
 						}
 					}
+				} else if (args[0].equalsIgnoreCase("start")) {
+					plugin.getGameTask().setSeconds(1);
 				}
 			}
 		}

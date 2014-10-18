@@ -3,18 +3,18 @@ package eu.the5zig.effects.game.generators;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
-import eu.the5zig.effects.Main;
+public class ResetPlatformGenerator implements Generator {
 
-public class ResetPlatformGenerator extends Generator {
+	private GeneratorManager manager;
 
-	public ResetPlatformGenerator(Main plugin) {
-		super(plugin);
+	public ResetPlatformGenerator(GeneratorManager manager) {
+		this.manager = manager;
 	}
 
 	@Override
 	public void generate() {
-		Location min = plugin.getConfigManager().getPlatformManager().getMin();
-		Location max = plugin.getConfigManager().getPlatformManager().getMax();
+		Location min = manager.getPlugin().getConfigManager().getPlatformManager().getMin();
+		Location max = manager.getPlugin().getConfigManager().getPlatformManager().getMax();
 
 		if (min == null || max == null) return;
 

@@ -1,8 +1,6 @@
 package eu.the5zig.effects.game;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import eu.the5zig.effects.Main;
@@ -28,29 +26,20 @@ public class GameTask extends BukkitRunnable {
 		runTaskTimer(plugin, 10, 20);
 	}
 
+	/**
+	 * Broadcasts how many seconds are left until the game starts and starts the game after seconds reach 0
+	 */
 	@Override
 	public void run() {
 		if ((seconds % 20 == 0 || seconds == 10 || seconds <= 5) && seconds != 0) Bukkit.broadcastMessage(seconds + " seconds remaining!");
 		seconds--;
-		if (seconds < 0) startGame();
+		if (seconds < 0) {
+			cancel();
+			plugin.getGameManager().startGame();
+		}
 	}
 
-	/**
-	 * Start the game!
-	 */
-	private void startGame() {
-		if (Bukkit.getOnlinePlayers().length < 2) {
-			seconds = 60;
-			Bukkit.broadcastMessage("Not enough players!");
-			return;
-		}
-		Location min = plugin.getConfigManager().getPlatformManager().getMin();
-		int x = min.getBlockX() / 2;
-		int z = min.getBlockZ() / 2;
-		int u = x > z ? x : z;
-		Location loc = new Location(min.getWorld(), x > z ? x : min.getBlockX(), min.getBlockY(), x > z ? min.getBlockZ() : z);
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			player.teleport(loc);
-		}
+	public void setSeconds(int seconds) {
+		this.seconds = seconds;
 	}
 }

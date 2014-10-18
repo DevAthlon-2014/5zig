@@ -17,6 +17,11 @@ public class Selection {
 		this.max = loc;
 	}
 
+	/**
+	 * Tries to get the location with smallest x and z values
+	 * 
+	 * @return the smallest Location
+	 */
 	public Location getMin() {
 		if (min == null && max == null) return null;
 		if (min != null && max == null) return min;
@@ -28,6 +33,11 @@ public class Selection {
 		return new Location(min.getWorld(), x, y, z);
 	}
 
+	/**
+	 * Tries to get the location with biggest x and z values
+	 * 
+	 * @return the biggest Location
+	 */
 	public Location getMax() {
 		if (min == null && max == null) return null;
 		if (min != null && max == null) return min;
@@ -39,6 +49,11 @@ public class Selection {
 		return new Location(min.getWorld(), x, y, z);
 	}
 
+	/**
+	 * Returns if both locations have been set
+	 * 
+	 * @return
+	 */
 	public boolean hasMinAndMax() {
 		return min != null && max != null;
 	}
