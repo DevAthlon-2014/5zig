@@ -1,7 +1,9 @@
 package eu.the5zig.effects.game.generators;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
 public class ResetPlatformGenerator implements Generator {
 
@@ -20,7 +22,11 @@ public class ResetPlatformGenerator implements Generator {
 
 		for (int x = min.getBlockX() + 1; x < max.getBlockX(); x++) {
 			for (int z = min.getBlockZ() + 1; z < max.getBlockZ(); z++) {
-				new Location(min.getWorld(), x, min.getBlockY(), z).getBlock().setType(Material.HARD_CLAY);
+				Location l = new Location(min.getWorld(), x, min.getBlockY(), z);
+				for (Player p : Bukkit.getOnlinePlayers()) {
+					p.sendBlockChange(l, Material.HARD_CLAY, (byte) 0);
+				}
+				l.getBlock().setType(Material.HARD_CLAY);
 			}
 		}
 	}

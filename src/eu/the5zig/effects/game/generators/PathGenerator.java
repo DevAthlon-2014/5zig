@@ -2,11 +2,10 @@ package eu.the5zig.effects.game.generators;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
-import javax.crypto.Cipher;
-
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.comphenix.packetwrapper.WrapperPlayServerWorldParticles.ParticleEffect;
@@ -19,8 +18,6 @@ public class PathGenerator extends BukkitRunnable implements Generator {
 	private GeneratorManager manager;
 	private final Random r = new Random();
 
-	private List<Location> blocks = Lists.newArrayList();
-
 	public PathGenerator(GeneratorManager manager) {
 		this.manager = manager;
 	}
@@ -30,6 +27,7 @@ public class PathGenerator extends BukkitRunnable implements Generator {
 	 */
 	@Override
 	public void generate() {
+		List<Location> blocks = Lists.newArrayList();
 		Location min = manager.getPlugin().getConfigManager().getPlatformManager().getMin();
 		Location max = manager.getPlugin().getConfigManager().getPlatformManager().getMax();
 		int x = min.getBlockX() + 1;
@@ -77,6 +75,7 @@ public class PathGenerator extends BukkitRunnable implements Generator {
 				blocks.add(loc);
 			}
 		}
+		manager.getPlugin().getGameManager().setBlocks(blocks);
 
 		runTaskTimer(manager.getPlugin(), 0, 4);
 	}
@@ -85,17 +84,17 @@ public class PathGenerator extends BukkitRunnable implements Generator {
 
 	@Override
 	public void run() {
-//		if (index >= blocks.size()) {
-//			cancel();
-//			// manager.getPlugin().getGameManager().
-//			return;
-//		}
-
+		List<Location> blocks = manager.getPlugin().getGameManager().getBlocks();
+		if (index >= blocks.size()) {
+			index = 0;
+		}
 		Location loc = blocks.get(index++ % blocks.size());
-//		loc.getBlock().setTypeIdAndData(Material.WOOL.getId(), (byte) 5, true);
+		// loc.getBlock().setTypeIdAndData(Material.WOOL.getId(), (byte) 5, true);
 		for (double x = loc.getX(); x <= loc.getX() + 1; x += 0.5) {
 			for (double z = loc.getZ(); z <= loc.getZ() + 1; z += 0.5) {
-				Effect.animate(ParticleEffect.INSTANT_SPELL, new Location(loc.getWorld(), x, loc.getY() + 1, z));
+				for (UUID uuid : manager.getPlugin().getGameManager().getDontMove()) {
+					Effect.animate(Bukkit.getPlayer(uuid), ParticleEffect.INSTANT_SPELL, new Location(loc.getWorld(), x, loc.getY() + 1, z));
+				}
 			}
 		}
 	}

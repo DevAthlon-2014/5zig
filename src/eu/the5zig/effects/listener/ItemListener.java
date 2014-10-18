@@ -5,7 +5,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import eu.the5zig.effects.Main;
@@ -16,13 +15,6 @@ public class ItemListener implements Listener {
 
 	public ItemListener(Main plugin) {
 		this.plugin = plugin;
-	}
-
-	@EventHandler
-	public void onInventoryClick(InventoryClickEvent e) {
-		if (e.getWhoClicked() instanceof Player) {
-			e.setCancelled(true);
-		}
 	}
 
 	@EventHandler
