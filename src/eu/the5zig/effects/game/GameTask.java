@@ -1,6 +1,8 @@
 package eu.the5zig.effects.game;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import eu.the5zig.effects.Main;
@@ -33,10 +35,22 @@ public class GameTask extends BukkitRunnable {
 		if (seconds < 0) startGame();
 	}
 
+	/**
+	 * Start the game!
+	 */
 	private void startGame() {
 		if (Bukkit.getOnlinePlayers().length < 2) {
 			seconds = 60;
 			Bukkit.broadcastMessage("Not enough players!");
+			return;
+		}
+		Location min = plugin.getConfigManager().getPlatformManager().getMin();
+		int x = min.getBlockX() / 2;
+		int z = min.getBlockZ() / 2;
+		int u = x > z ? x : z;
+		Location loc = new Location(min.getWorld(), x > z ? x : min.getBlockX(), min.getBlockY(), x > z ? min.getBlockZ() : z);
+		for (Player player : Bukkit.getOnlinePlayers()) {
+			player.teleport(loc);
 		}
 	}
 }

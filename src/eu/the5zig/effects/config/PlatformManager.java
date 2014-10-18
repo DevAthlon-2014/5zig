@@ -49,6 +49,15 @@ public class PlatformManager {
 		return selecting.get(p.getUniqueId());
 	}
 
+	/**
+	 * Called when a player interacts
+	 * 
+	 * @param Player
+	 *            player
+	 * @param Location
+	 *            block
+	 * @param int type (0 for MIN, 1 for MAX)
+	 */
 	public void onSelect(Player p, Location block, int type) {
 		if (isSelecting(p)) {
 			Selection s = getSelection(p);
@@ -76,15 +85,20 @@ public class PlatformManager {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+
 				plugin.getPlatformGenerator().generate();
 				plugin.getResetPlatformGenerator().generate();
-				
+
 				removeFromSelectList(p);
 			}
 		}
 	}
 
+	/**
+	 * Gets the locations of all blocks inside the platform
+	 * 
+	 * @return List<Location> blocks
+	 */
 	public List<Location> getBorderBlocks() {
 		if (!borderConfig.contains("min") || !borderConfig.contains("max")) return Lists.newArrayList();
 
@@ -100,6 +114,11 @@ public class PlatformManager {
 		return blocks;
 	}
 
+	/**
+	 * Gets the minimal Location
+	 * 
+	 * @return Location min
+	 */
 	public Location getMin() {
 		if (!borderConfig.contains("min")) return null;
 
@@ -107,6 +126,11 @@ public class PlatformManager {
 		return min;
 	}
 
+	/**
+	 * Gets the maximal Location
+	 * 
+	 * @return Location max
+	 */
 	public Location getMax() {
 		if (!borderConfig.contains("max")) return null;
 

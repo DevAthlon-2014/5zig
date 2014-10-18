@@ -10,6 +10,9 @@ public abstract class Generator {
 		this.plugin = plugin;
 	}
 
+	/**
+	 * Generate blocks for the platform
+	 */
 	public abstract void generate();
 
 }

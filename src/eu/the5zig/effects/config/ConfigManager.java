@@ -15,8 +15,13 @@ public class ConfigManager {
 		borderManager = new PlatformManager(plugin);
 	}
 
+	/**
+	 * Returns the PlatformManager class that contains all functions that we need to set and get the platform
+	 * 
+	 * @return the PlatformManager class
+	 */
 	public PlatformManager getPlatformManager() {
 		return borderManager;
 	}
-	
+
 }

@@ -33,14 +33,29 @@ public class Main extends JavaPlugin {
 
 	}
 
+	/**
+	 * Returns the ConfigManager class
+	 * 
+	 * @return the ConfigManager class
+	 */
 	public ConfigManager getConfigManager() {
 		return configManager;
 	}
 
+	/**
+	 * Returns the BorderGenerator class that generates the border of the plattform
+	 * 
+	 * @return the BorderGenerator class
+	 */
 	public BorderGenerator getPlatformGenerator() {
 		return borderGenerator;
 	}
 
+	/**
+	 * Returns the ResetPlatformGenerator class that resets the platform and fills it with snow again
+	 * 
+	 * @return the ResetPlatformGenerator class
+	 */
 	public ResetPlatformGenerator getResetPlatformGenerator() {
 		return resetPlatformGenerator;
 	}
