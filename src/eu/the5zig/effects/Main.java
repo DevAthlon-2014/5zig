@@ -9,6 +9,7 @@ import eu.the5zig.effects.game.GameTask;
 import eu.the5zig.effects.game.generators.GeneratorManager;
 import eu.the5zig.effects.listener.FreezeListener;
 import eu.the5zig.effects.listener.ItemListener;
+import eu.the5zig.effects.listener.JoinQuitListener;
 import eu.the5zig.effects.listener.MoveListener;
 import eu.the5zig.effects.listener.PlayerListener;
 
@@ -34,6 +35,7 @@ public class Main extends JavaPlugin {
 		plManager.registerEvents(new FreezeListener(this), this);
 		plManager.registerEvents(new ItemListener(this), this);
 		plManager.registerEvents(new MoveListener(this), this);
+		plManager.registerEvents(new JoinQuitListener(this), this);
 		plManager.registerEvents(new PlayerListener(), this);
 	}
 

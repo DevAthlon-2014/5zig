@@ -48,7 +48,8 @@ public class PathfindCommand implements CommandExecutor, TabCompleter {
 				} else if (args[0].equalsIgnoreCase("start")) {
 					if (sender.hasPermission("pathfind.start")) {
 						if (!plugin.getGameManager().isInGame()) {
-							plugin.getGameTask().setSeconds(1);
+							sender.sendMessage(Formatting.PREFIX + "Starting game");
+							plugin.getGameTask().setSeconds(10);
 						} else {
 							sender.sendMessage(Formatting.PREFIX + "Game already in progress!");
 						}

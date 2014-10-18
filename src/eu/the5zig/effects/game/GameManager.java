@@ -72,11 +72,23 @@ public class GameManager {
 		return inGame;
 	}
 
+	public void removeFromScore(Player p) {
+		scores.remove(p.getUniqueId());
+	}
+
+	public void unfreeze(Player p) {
+		dontMove.remove(p.getUniqueId());
+	}
+	
+	public void removeFromPlaying(Player p) {
+		playing.remove(p.getUniqueId());
+	}
+	
 	/**
 	 * Start the game!
 	 */
 	public void startGame() {
-		if (Bukkit.getOnlinePlayers().length < 1) {
+		if (Bukkit.getOnlinePlayers().length < 2) {
 			Bukkit.broadcastMessage(Formatting.PREFIX + "Not enough players online! Resetting countdown");
 			plugin.startGameTask();
 			return;
@@ -155,7 +167,7 @@ public class GameManager {
 	 * @param Player
 	 *            player
 	 */
-	public void endGame(Player p) {
+	public void endGame(Player p, boolean force) {
 		Bukkit.broadcastMessage(Formatting.PREFIX + p.getName() + " won this round!");
 		Firework fw = (Firework) p.getWorld().spawnEntity(p.getLocation(), EntityType.FIREWORK);
 		FireworkMeta fwm = fw.getFireworkMeta();
@@ -182,7 +194,7 @@ public class GameManager {
 		playing.clear();
 		dontMove.clear();
 
-		if (scores.get(p.getUniqueId()) > 3) {
+		if (scores.get(p.getUniqueId()) > 3 || force) {
 			inGame = false;
 			Bukkit.broadcastMessage(Formatting.PREFIX + p.getName() + " won the game!");
 

@@ -19,7 +19,7 @@ public class GameTask extends BukkitRunnable {
 		PlatformManager m = plugin.getConfigManager().getPlatformManager();
 		if (m.getBorderBlocks().isEmpty()) {
 			System.err.println("No Platform Location defined!");
-			System.err.println("Please select a Platform ingame with the '/effect setplatform' command and reload the server afterwards!");
+			System.err.println("Please select a Platform ingame with the '/pathfind setborder' command and reload the server afterwards!");
 			return;
 		}
 

@@ -55,7 +55,7 @@ public class MoveListener implements Listener {
 						}
 					}, 40);
 				} else if (e.getTo().getBlockX() >= max.getBlockX() && (e.getTo().getBlockZ() >= min.getBlockZ() || e.getTo().getBlockZ() <= max.getBlockZ())) {
-					plugin.getGameManager().endGame(p);
+					plugin.getGameManager().endGame(p, false);
 				} else if (e.getTo().getBlockX() == min.getBlockX()) {
 				} else {
 					p.teleport(e.getFrom());
